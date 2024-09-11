@@ -42,9 +42,18 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    const getRandomCode = () => {
+      let randomCode;
+      let isCodeExists;
+      do {
+        randomCode = Math.floor(Math.random() * 10000);
+        isCodeExists = this.state.list.some(item => item.code === randomCode);
+      } while (isCodeExists);
+      return randomCode;
+    };
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }],
+      list: [...this.state.list, { code: getRandomCode(), title: 'Новая запись' }],
     });
   }
 
@@ -70,7 +79,7 @@ class Store {
         if (item.code === code) {
           item.selected = !item.selected;
         } else {
-          item.selected = false
+          item.selected = false;
         }
         return item;
       }),
