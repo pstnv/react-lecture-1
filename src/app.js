@@ -35,13 +35,15 @@ function App({ store }) {
                 onClick={() => store.selectItem(item.code)}
               >
                 <div className="Item-code">{i + 1}</div>
-                <div className="Item-title">{item.title}</div>
-                {item.selectedCount && (
-                  <div className="Item-title">
-                    Выделяли {item.selectedCount}{' '}
-                    {normalizeWord(item.selectedCount, ['раз', 'раза', 'раз'])}
-                  </div>
-                )}
+                <div className="Item-title">
+                  {item.title}
+                  {item.selectedCount && (
+                    <span className="Item-count">
+                      | Выделяли {item.selectedCount}{' '}
+                      {normalizeWord(item.selectedCount, ['раз', 'раза', 'раз'])}
+                    </span>
+                  )}
+                </div>
                 <div className="Item-actions">
                   <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
                 </div>
